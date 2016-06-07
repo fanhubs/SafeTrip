@@ -1,6 +1,6 @@
 package com.ibm.safetrip
-import java.util.concurrent.TimeoutException
 
+import java.util.concurrent.TimeoutException
 import akka.actor.SupervisorStrategy._
 import akka.actor._
 import akka.util.Timeout

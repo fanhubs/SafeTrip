@@ -54,6 +54,24 @@ final class SafeTripSettings(conf: Option[Config] = None) extends Serializable w
   val KafkaBatchSendSize = kafka.getInt("batch.send.size")
   val KafkaGroupId = kafka.getString("group.id")
   val KafkaTopicRaw = kafka.getString("topic.raw")
+  val kafkaHosts = kafka.getString("hosts")
+  val kafkaBrokerList = kafka.getString("broker.list")
+
+  /* App Specific Settings */
+  protected val weather = rootConfig.getConfig("weather")
+
+  val AppName = weather.getString("app-name")
+
+  val SparkCheckpointDir = weather.getString("spark.checkpoint.dir")
+
+  val CassandraKeyspace = weather.getString("cassandra.keyspace")
+  val CassandraTableRaw = weather.getString("cassandra.table.raw")
+  //val CassandraTableDailyTemp = weather.getString("cassandra.table.daily.temperature")
+  //val CassandraTableDailyPrecip = weather.getString("cassandra.table.daily.precipitation")
+  //val CassandraTableCumulativePrecip = weather.getString("cassandra.table.cumulative.precipitation")
+  //val CassandraTableSky = weather.getString("cassandra.table.sky")
+  //val CassandraTableStations = weather.getString("cassandra.table.stations")
+
 
   /** Attempts to acquire from environment, then java system properties. */
   private def withFallback[T](env: Try[T], key: String): Option[T] = env match {

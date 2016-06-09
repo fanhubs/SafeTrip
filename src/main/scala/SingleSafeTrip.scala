@@ -21,11 +21,7 @@ object SingleSafeTrip extends App{
     .setMaster(SparkMaster)
     .setAppName(AppName)
     .set("spark.cassandra.connection.host", CassandraHosts)
-    .set("spark.cassandra.connection.port",CassandraRpcPort.toString)
-    //.set("spark.cleaner.ttl", SparkCleanerTtl.toString)
-    //.setExecutorEnv("spark.local.ip","127.0.0.1")
-    //.setExecutorEnv("spark.driver.ip","127.0.0.1")
-  //.set("spark.cleaner.ttl", SparkCleanerTtl.toString)
+    .set("spark.cassandra.connection.port",CassandraNativePort.toString)
 
   val sc = new SparkContext(conf)
 

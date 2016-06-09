@@ -32,7 +32,7 @@ class KafkaStreamingActor(ssc: StreamingContext,
 
   // removed pram - kafkaParams: Map[String, String]
   import settings._
-  import OnTime._
+  import Trip._
 
   val kafkaParams = Map[String, String]("metadata.broker.list" -> kafkaBrokerList)
   val topics = Set(topic)

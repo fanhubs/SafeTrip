@@ -30,12 +30,7 @@ import org.apache.spark.util.logging
 
     // removed pram - kafkaParams: Map[String, String]
     import settings._
-    import OnTime._
-
-
-
-
-
+    import Trip._
 
     val kafkaParams = Map[String, String]("metadata.broker.list" -> kafkaBrokerList)
     val topics = Set(topic)
@@ -44,15 +39,11 @@ import org.apache.spark.util.logging
       String,
       StringDecoder,
       StringDecoder](ssc, kafkaParams, topics)
+      .map { case (_, line) => line.split(",")}
+      .map(RawTripData(_))
 
-    kafkaStream.foreachRDD(rdd => {
-      rdd.map (a=> a._2.split(","))
-
-    }
-
-    )
-
-
+    /** Saves the raw data to Cassandra - raw table. */
+    kafkaStream.saveToCassandra(CassandraKeyspace, CassandraTableRaw)
 
 
 }

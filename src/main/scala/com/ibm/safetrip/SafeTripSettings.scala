@@ -58,14 +58,14 @@ final class SafeTripSettings(conf: Option[Config] = None) extends Serializable w
   val kafkaBrokerList = kafka.getString("broker.list")
 
   /* App Specific Settings */
-  protected val weather = rootConfig.getConfig("weather")
+  protected val trip = rootConfig.getConfig("trip")
 
-  val AppName = weather.getString("app-name")
+  val AppName = trip.getString("app-name")
 
-  val SparkCheckpointDir = weather.getString("spark.checkpoint.dir")
+  val SparkCheckpointDir = trip.getString("spark.checkpoint.dir")
 
-  val CassandraKeyspace = weather.getString("cassandra.keyspace")
-  val CassandraTableRaw = weather.getString("cassandra.table.raw")
+  val CassandraKeyspace = trip.getString("cassandra.keyspace")
+  val CassandraTableRaw = trip.getString("cassandra.table.raw")
   //val CassandraTableDailyTemp = weather.getString("cassandra.table.daily.temperature")
   //val CassandraTableDailyPrecip = weather.getString("cassandra.table.daily.precipitation")
   //val CassandraTableCumulativePrecip = weather.getString("cassandra.table.cumulative.precipitation")

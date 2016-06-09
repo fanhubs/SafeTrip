@@ -7,11 +7,11 @@ import org.joda.time.DateTime
 /**
   * Created by qiang on 16-6-3.
   */
-object OnTime {
+object Trip {
 
   /** Base marker trait. */
   @SerialVersionUID(1L)
-  sealed trait OnTimeModel extends Serializable
+  sealed trait TripModel extends Serializable
 
   /**
     *
@@ -34,7 +34,7 @@ object OnTime {
     * @param dest
     * @param Distance
     */
-  case class RawWeatherData(
+  case class RawTripData(
                              year: Int,
                              month: Int,
                              dayofMonth: Int,
@@ -52,13 +52,13 @@ object OnTime {
                              depDelay:Int,
                              origin:String,
                              dest: String,
-                             Distance: Int) extends OnTimeModel
+                             Distance: Int) extends TripModel
 
-  object RawWeatherData {
+  object RawTripData {
 
-    def apply(array: Array[String]): RawWeatherData = {
+    def apply(array: Array[String]): RawTripData = {
 
-      RawWeatherData(
+      RawTripData(
         year = array(0).toInt,
         month= array(1).toInt,
         dayofMonth= array(2).toInt,
@@ -87,7 +87,7 @@ object OnTime {
 
 object OnTimeEvent {
 
-  import OnTime._
+  import Trip._
 
   /** Base marker trait. */
   @SerialVersionUID(1L)

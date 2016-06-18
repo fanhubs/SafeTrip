@@ -11,6 +11,7 @@ import org.apache.spark.SparkContext
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.streaming.kafka.KafkaUtils
+import com.datastax.spark.connector._
 import com.datastax.spark.connector.streaming._
 import kafka.utils.Logging
 import org.apache.spark.util.logging
@@ -26,7 +27,7 @@ import org.apache.spark.util.logging
 
   class KafkaStreaming(ssc: StreamingContext,
                             settings: SafeTripSettings,
-                            topic: String) extends Logging{
+                            topic: String) extends Logging {
 
     // removed pram - kafkaParams: Map[String, String]
     import settings._
@@ -39,11 +40,37 @@ import org.apache.spark.util.logging
       String,
       StringDecoder,
       StringDecoder](ssc, kafkaParams, topics)
-      .map { case (_, line) => line.split(",")}
-      .map(RawTripData(_))
+
+
+    kafkaStream.foreachRDD(
+        rdd=> (rdd.map(_._2.split(",")).map(RawTripData(_))).saveToCassandra(CassandraKeyspace, CassandraTableRaw)
+
+          )
+
+      //.map{
+       // rdd=> { rdd._2.map{ line => line.toString}.foreach(println) }}
+      //case line => line._2.split(",")}.foreachRDD(x=>println(x.toString))
+
+//      foreachRDD{
+//      rdd=> {
+//        rdd.map(
+//          line => line._2.split(",")
+//        )
+//      }
+//
+//    }
+
+
+      //.map(RawTripData(_))
+
+        //.foreach(item=>println(item.toString))
+
+      //map { case (_, line) => line.split(",")}
+     // .map(RawTripData(_))
+
 
     /** Saves the raw data to Cassandra - raw table. */
-    kafkaStream.saveToCassandra(CassandraKeyspace, CassandraTableRaw)
+    //kafkaStream.saveToCassandra(CassandraKeyspace, CassandraTableRaw)
 
 
 }

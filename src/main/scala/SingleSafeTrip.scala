@@ -27,7 +27,7 @@ object SingleSafeTrip extends App{
 
   /** Creates the Spark Streaming context. */
   val ssc = new StreamingContext(sc, Seconds(2))
-  ssc.checkpoint(SparkCheckpointDir)
+  //ssc.checkpoint(SparkCheckpointDir)
 
 
   val kfkStreaming = new KafkaStreaming(ssc,settings,"time-raw-data")

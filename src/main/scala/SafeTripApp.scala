@@ -2,6 +2,8 @@
   * Created by qiang on 16-6-4.
   */
 
+package com.ibm.safetrip
+
 import akka.actor.{Props, ActorSystem, PoisonPill}
 import com.ibm.safetrip.{NodeGuardian,  SafeTripSettings}
 import org.apache.spark.serializer.KryoSerializer

@@ -25,7 +25,7 @@ object Trip {
     * @param uniquecarrier
     * @param flightnum
     * @param tailnum
-    * @param actualelapsedeime
+    * @param actualelapsedtime
     * @param crselapsedtime
     * @param airtime
     * @param arrdelay

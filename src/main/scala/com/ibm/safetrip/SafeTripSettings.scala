@@ -22,7 +22,7 @@ final class SafeTripSettings(conf: Option[Config] = None) extends Serializable w
   protected val spark = rootConfig.getConfig("spark")
 
   val SparkMaster = withFallback[String](Try(spark.getString("master")),
-    "spark.master") getOrElse "local[*]"
+    "spark.master") getOrElse "local[2]"
 
 
   val SparkCleanerTtl = withFallback[Int](Try(spark.getInt("cleaner.ttl")),
@@ -30,6 +30,9 @@ final class SafeTripSettings(conf: Option[Config] = None) extends Serializable w
 
   val SparkStreamingBatchInterval = withFallback[Int](Try(spark.getInt("streaming.batch.interval")),
     "spark.streaming.batch.interval") getOrElse 1
+
+  val DataDir = withFallback[String](Try(spark.getString("data.dir")),
+    "data.dir") getOrElse "/usr/data"
 
   //cassandra config items
   protected val cassandra = rootConfig.getConfig("cassandra")
@@ -60,8 +63,12 @@ final class SafeTripSettings(conf: Option[Config] = None) extends Serializable w
   /* App Specific Settings */
   protected val trip = rootConfig.getConfig("trip")
 
+  //this is the name of data processing application
   val AppName = trip.getString("app-name")
+  //this is the name of data entry application.
+  val DataAppNmme = trip.getString("data-app-name")
 
+  //this this the data check point for record down kafka off-set
   val SparkCheckpointDir = trip.getString("spark.checkpoint.dir")
 
   val CassandraKeyspace = trip.getString("cassandra.keyspace")

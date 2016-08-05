@@ -2,19 +2,19 @@ package com.ibm.safetrip
 
 import java.io.{File => JFile}
 import scala.util.Try
-import com.datastax.driver.core.ConsistencyLevel
-import com.datastax.spark.connector.cql.{NoAuthConf, PasswordAuthConf, AuthConf}
+//import com.datastax.driver.core.ConsistencyLevel
+//import com.datastax.spark.connector.cql.{NoAuthConf, PasswordAuthConf, AuthConf}
 import com.typesafe.config.{Config, ConfigFactory}
-import org.apache.spark.Logging
+//import org.apache.spark.Logging
 
 /**
   * Created by qiang on 16-6-4.
   */
-final class SafeTripSettings(conf: Option[Config] = None) extends Serializable with Logging  {
+final class SafeTripSettings(conf: Option[Config] = None) extends Serializable  {
 
   //create root config object
   val rootConfig = conf match {
-    case Some(c) => c.withFallback(ConfigFactory.load)
+    //case Some(c) => c.withFallback(ConfigFactory.load)
     case _ => ConfigFactory.load
   }
 
@@ -40,7 +40,7 @@ final class SafeTripSettings(conf: Option[Config] = None) extends Serializable w
   val CassandraHosts = withFallback[String](Try(cassandra.getString("connection.host")),
     "spark.cassandra.connection.host") getOrElse "127.0.0.1"
 
-  logInfo(s"Starting up with spark master '$SparkMaster' cassandra hosts '$CassandraHosts'")
+  //logInfo(s"Starting up with spark master '$SparkMaster' cassandra hosts '$CassandraHosts'")
 
   val CassandraRpcPort = withFallback[Int](Try(cassandra.getInt("connection.rpc.port")),
     "spark.cassandra.connection.rpc.port") getOrElse 9160

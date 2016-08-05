@@ -12,7 +12,7 @@ import org.apache.spark.SparkContext
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.streaming.kafka.KafkaUtils
-import com.datastax.spark.connector.streaming._
+//import com.datastax.spark.connector.streaming._
 
 
 

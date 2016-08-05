@@ -7,7 +7,6 @@ import org.apache.spark.serializer.KryoSerializer
 import org.apache.spark.streaming.{Milliseconds, Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
 import com.ibm.safetrip.SafeTripSettings
-import org.apache.spark.Logging
 
 /**
   * Created by qiang on 16-6-7.

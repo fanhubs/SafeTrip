@@ -11,8 +11,8 @@ import org.apache.spark.SparkContext
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.streaming.kafka.KafkaUtils
-import com.datastax.spark.connector._
-import com.datastax.spark.connector.streaming._
+//import com.datastax.spark.connector._
+//import com.datastax.spark.connector.streaming._
 import kafka.utils.Logging
 import org.apache.spark.util.logging
 
@@ -42,10 +42,10 @@ import org.apache.spark.util.logging
       StringDecoder](ssc, kafkaParams, topics)
 
 
-    kafkaStream.foreachRDD(
-        rdd=> (rdd.map(_._2.split(",")).map(RawTripData(_))).saveToCassandra(CassandraKeyspace, CassandraTableRaw)
+    //kafkaStream.foreachRDD(
+    //    rdd=> (rdd.map(_._2.split(",")).map(RawTripData(_))).saveToCassandra(CassandraKeyspace, CassandraTableRaw)
 
-          )
+    //      )
 
       //.map{
        // rdd=> { rdd._2.map{ line => line.toString}.foreach(println) }}

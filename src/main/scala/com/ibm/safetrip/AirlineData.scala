@@ -8,13 +8,13 @@ import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql._
 import org.apache.spark.streaming._
-import org.apache.spark.Logging
+
 
 
 /**
   * Created by qiang on 16-6-28.
   */
-class AirlineData(sc: SparkConf) extends  Logging with Serializable {
+class AirlineData(sc: SparkConf) extends Serializable {
 
   //val settings  = new SafeTripSettings()
   //import settings._

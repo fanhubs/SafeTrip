@@ -14,23 +14,25 @@ version := "latest"
 startYear := Some(2015)
 
 scalaVersion := "2.11.6"
-
+//  "com.databricks" %% "spark-csv" % "2.0.0",
+//  "com.datastax.spark" %% "spark-cassandra-connector" % "1.6.0",
+//  "org.apache.spark" %% "spark-streaming-kafka-0-8_2.11",
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % "1.6.0"  % "provided",
-  "com.databricks" % "spark-csv_2.10" % "1.4.0",
-  "org.apache.spark" %% "spark-sql" % "1.6.0"  % "provided",
-  "org.apache.spark" %% "spark-streaming" % "1.6.0"  % "provided" ,
-  "org.apache.spark" %% "spark-streaming-kafka" % "1.6.0" ,
+  "org.apache.spark" %% "spark-core" % "2.0.0"  % "compile",
+  "org.apache.spark" %% "spark-sql" % "2.0.0"  % "compile",
+  "org.apache.spark" %% "spark-streaming" % "2.0.0"  % "compile",
+  "org.apache.spark" %% "spark-streaming-kafka" % "1.6.2",
+  "org.apache.spark" % "spark-streaming-kafka-0-8_2.11" % "2.0.0",
+  "com.datastax.spark" %% "spark-cassandra-connector" % "2.0.0-M2",
   "org.apache.commons" % "commons-pool2" % "2.3",
   "io.jvm.uuid" %% "scala-uuid" % "0.2.1",
-  "com.datastax.spark" %% "spark-cassandra-connector" % "1.5.0",
+  "joda-time" % "joda-time" % "2.9.4",
   "com.typesafe.akka" %% "akka-actor" % "2.3.11",
   "com.typesafe.akka" %% "akka-cluster" % "2.3.11",
   "com.typesafe.akka" %% "akka-remote" % "2.3.11",
+  "com.google.guava" % "guava" % "16.0.1",
   "com.typesafe.akka" %% "akka-slf4j" % "2.3.11"
-).map(
-  _.excludeAll(ExclusionRule(organization = "org.mortbay.jetty"))
-)
+).map(_.excludeAll(ExclusionRule(organization = "org.mortbay.jetty")))
 
 mergeStrategy in assembly := {
   case "META-INF/io.netty.versions.properties"         => MergeStrategy.first
@@ -46,7 +48,7 @@ mergeStrategy in assembly := {
     oldStrategy(x)
 }
 
-enablePlugins(DockerPlugin)
+//enablePlugins(DockerPlugin)
 
 
 mainClass in Compile := Some("com.ibm.safetrip.SingleSafeTrip")
